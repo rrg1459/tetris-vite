@@ -1,2 +1,2 @@
-# Tetris with Vite
+# Tetris with vanilla vite
 
