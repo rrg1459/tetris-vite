@@ -27,3 +27,12 @@ function draw () {
 }
 
 update()
+
+// 3. board
+const board = createBoard(BOARD_WIDTH, BOARD_HEIGHT)
+board[BOARD_HEIGHT - 2].fill(9, 0, BOARD_WIDTH - 2)
+board[BOARD_HEIGHT - 1].fill(9, 0, BOARD_WIDTH - 2)
+
+function createBoard (width, height) {
+  return Array(height).fill().map(() => Array(width).fill(0))
+}
