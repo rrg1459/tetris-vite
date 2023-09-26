@@ -20,4 +20,5 @@ body {
   padding: 0;
   display: grid;
   place-content: center;
+  height: 100vh; // para que lo centre verticalmente.
 }
