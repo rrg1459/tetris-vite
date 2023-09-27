@@ -40,7 +40,7 @@ function draw() {
 
   board.forEach((row, y) => {
     row.forEach((value, x) => {
-      if (value > 0) {
+      if (value) {
 
         if (value === 9) context.fillStyle = 'gray'
         context.fillRect(x, y, 1, 1)
