@@ -19,19 +19,29 @@ function update () {
   window.requestAnimationFrame(update)
 }
 
-function draw () {
-  // todo el tablero
-  console.log('xxx KABUMMM');
-  context.fillStyle = '#000'
-  context.fillRect(0, 0, canvas.width, canvas.height)
-}
-
-update()
-
 // 3. board
 const board = createBoard(BOARD_WIDTH, BOARD_HEIGHT)
 board[BOARD_HEIGHT - 2].fill(9, 0, BOARD_WIDTH - 2)
 board[BOARD_HEIGHT - 1].fill(9, 0, BOARD_WIDTH - 2)
+
+function draw () {
+  // todo el tablero
+  context.fillStyle = '#000'
+  context.fillRect(0, 0, canvas.width, canvas.height)
+
+  board.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value > 0) {
+
+        if (value === 9) context.fillStyle = 'gray'
+        context.fillRect(x, y, 1, 1)
+      }
+    })
+  })
+}
+
+update()
+
 
 function createBoard (width, height) {
   return Array(height).fill().map(() => Array(width).fill(0))
