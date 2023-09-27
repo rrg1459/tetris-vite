@@ -24,11 +24,6 @@ const board = createBoard(BOARD_WIDTH, BOARD_HEIGHT)
 // board[BOARD_HEIGHT - 2].fill(9, 0, BOARD_WIDTH - 2)
 board[BOARD_HEIGHT - 1].fill(9, 0, BOARD_WIDTH - 2)
 
-function draw() {
-  // todo el tablero
-  context.fillStyle = '#000'
-  context.fillRect(0, 0, canvas.width, canvas.height)
-
   // 4. pieza player
   const piece = {
     position: { x: 5, y: 5 },
@@ -37,6 +32,11 @@ function draw() {
       [2, 2]
     ]
   }
+
+function draw() {
+  // todo el tablero
+  context.fillStyle = '#000'
+  context.fillRect(0, 0, canvas.width, canvas.height)
 
   board.forEach((row, y) => {
     row.forEach((value, x) => {
@@ -59,6 +59,12 @@ function draw() {
   })
 
 }
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') piece.position.x--
+  if (event.key === 'ArrowRight') piece.position.x++
+  if (event.key === 'ArrowDown') piece.position.y++
+})
 
 update()
 
