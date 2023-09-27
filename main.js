@@ -14,20 +14,29 @@ canvas.height = BLOCK_SIZE * BOARD_HEIGHT
 context.scale(BLOCK_SIZE, BLOCK_SIZE)
 
 // 2. game loop
-function update () {
+function update() {
   draw()
   window.requestAnimationFrame(update)
 }
 
 // 3. board
 const board = createBoard(BOARD_WIDTH, BOARD_HEIGHT)
-board[BOARD_HEIGHT - 2].fill(9, 0, BOARD_WIDTH - 2)
+// board[BOARD_HEIGHT - 2].fill(9, 0, BOARD_WIDTH - 2)
 board[BOARD_HEIGHT - 1].fill(9, 0, BOARD_WIDTH - 2)
 
-function draw () {
+function draw() {
   // todo el tablero
   context.fillStyle = '#000'
   context.fillRect(0, 0, canvas.width, canvas.height)
+
+  // 4. pieza player
+  const piece = {
+    position: { x: 5, y: 5 },
+    shape: [
+      [2, 2],
+      [2, 2]
+    ]
+  }
 
   board.forEach((row, y) => {
     row.forEach((value, x) => {
@@ -38,11 +47,22 @@ function draw () {
       }
     })
   })
+
+  piece.shape.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value) {
+        context.fillStyle = 'red'
+        if (value === 2) context.fillStyle = 'green'
+        context.fillRect(x + piece.position.x, y + piece.position.y, 1, 1)
+      }
+    })
+  })
+
 }
 
 update()
 
 
-function createBoard (width, height) {
+function createBoard(width, height) {
   return Array(height).fill().map(() => Array(width).fill(0))
 }
