@@ -13,15 +13,42 @@ canvas.height = BLOCK_SIZE * BOARD_HEIGHT
 
 context.scale(BLOCK_SIZE, BLOCK_SIZE)
 
-// // 2. game loop
-// function update() {
-//   draw()
-//   window.requestAnimationFrame(update)
-// }
-
 // 8. auto drop
 let dropCounter = 0
 let lastTime = 0
+
+// 9. random pieces
+export const PIECES = [
+  [
+    [2, 2],
+    [2, 2]
+  ],
+  [
+    [3, 3, 3, 3]
+  ],
+  [
+    [0, 4, 0],
+    [4, 4, 4]
+  ],
+  [
+    [5, 5, 0],
+    [0, 5, 5]
+  ],
+  [
+    [0, 6, 6],
+    [6, 6, 0]
+  ],
+  [
+    [7, 0],
+    [7, 0],
+    [7, 7]
+  ],
+  [
+    [0, 8],
+    [0, 8],
+    [8, 8]
+  ]
+]
 
 function update (time = 0) {
   const deltaTime = time - lastTime
@@ -67,6 +94,12 @@ function draw() {
     row.forEach((value, x) => {
       if (value) {
         if (value === 2) context.fillStyle = 'green'
+        if (value === 3) context.fillStyle = 'aqua'
+        if (value === 4) context.fillStyle = 'yellow'
+        if (value === 5) context.fillStyle = 'blue'
+        if (value === 6) context.fillStyle = 'purple'
+        if (value === 7) context.fillStyle = 'tomato'
+        if (value === 8) context.fillStyle = 'violet'
         if (value === 9) context.fillStyle = 'gray'
         context.fillRect(x, y, 1, 1)
       }
@@ -78,6 +111,12 @@ function draw() {
       if (value) {
         context.fillStyle = 'red'
         if (value === 2) context.fillStyle = 'green'
+        if (value === 3) context.fillStyle = 'aqua'
+        if (value === 4) context.fillStyle = 'yellow'
+        if (value === 5) context.fillStyle = 'blue'
+        if (value === 6) context.fillStyle = 'purple'
+        if (value === 7) context.fillStyle = 'tomato'
+        if (value === 8) context.fillStyle = 'violet'
         context.fillRect(x + piece.position.x, y + piece.position.y, 1, 1)
       }
     })
@@ -119,7 +158,12 @@ function solidifyPiece () {
       }
     })
   })
-  piece.position.x = 0
+
+  // get random shape
+  piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)]
+
+// reset initial position
+  piece.position.x = 6
   piece.position.y = 0
 }
 
