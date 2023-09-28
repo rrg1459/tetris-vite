@@ -163,8 +163,14 @@ function solidifyPiece () {
   piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)]
 
 // reset initial position
-  piece.position.x = 6
+  piece.position.x = Math.floor(BOARD_WIDTH / 2 - 2)
   piece.position.y = 0
+
+  // gameover
+  if (checkCollision()) {
+    window.alert('Game over!! Sorry!')
+    board.forEach((row) => row.fill(0))
+  }
 }
 
 function removeRows () {
