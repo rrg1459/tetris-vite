@@ -13,8 +13,27 @@ canvas.height = BLOCK_SIZE * BOARD_HEIGHT
 
 context.scale(BLOCK_SIZE, BLOCK_SIZE)
 
-// 2. game loop
-function update() {
+// // 2. game loop
+// function update() {
+//   draw()
+//   window.requestAnimationFrame(update)
+// }
+
+// 8. auto drop
+let dropCounter = 0
+let lastTime = 0
+
+function update (time = 0) {
+  const deltaTime = time - lastTime
+  lastTime = time
+
+  dropCounter += deltaTime
+
+  if (dropCounter > 1000) {
+    piece.position.y++
+    dropCounter = 0
+  }
+
   draw()
   window.requestAnimationFrame(update)
 }
@@ -102,7 +121,7 @@ function removeRows () {
   const rowsToRemove = []
 
   board.forEach((row, y) => {
-    // if (row.every(value => value > 0)) { is the same
+    // if (row.every(value => value > 0)) { // is the same
     if (row.every(value => value)) {
       rowsToRemove.push(y)
     }
