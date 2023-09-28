@@ -10,18 +10,18 @@ export const EVENT_MOVEMENTS = {
 }
 
 export const PIECES = [
-  [ // la pieza amarilla
+  [
     [2, 2],
     [2, 2]
   ],
   [
     [3, 3, 3, 3]
   ],
-  [ // es la pieza lila
+  [
     [0, 4, 0],
     [4, 4, 4]
   ],
-  [ // la pieza verde
+  [
     [5, 5, 0],
     [0, 5, 5]
   ],
@@ -40,3 +40,15 @@ export const PIECES = [
     [8, 8]
   ]
 ]
+
+export const COLORS = {
+  1: 'black',
+  2: 'green',
+  3: 'aqua',
+  4: 'yellow',
+  5: 'blue',
+  6: 'purple',
+  7: 'tomato',
+  8: 'violet',
+  9: 'gray',
+}
