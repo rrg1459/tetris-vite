@@ -1,8 +1,11 @@
 import './style.css'
 
+let score = 0
+
 // 1. Initialize canvas
 const canvas = document.querySelector('canvas')
 const context = canvas.getContext('2d')
+const $score = document.querySelector('span')
 
 export const BLOCK_SIZE = 20
 export const BOARD_WIDTH = 14
@@ -121,7 +124,7 @@ function draw() {
       }
     })
   })
-
+  $score.innerText = score
 }
 
 document.addEventListener('keydown', event => {
@@ -210,6 +213,7 @@ function removeRows() {
     board.splice(y, 1)
     const newRow = Array(BOARD_WIDTH).fill(0)
     board.unshift(newRow)
+    score += 10
   })
 }
 
