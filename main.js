@@ -32,6 +32,12 @@ function update (time = 0) {
   if (dropCounter > 1000) {
     piece.position.y++
     dropCounter = 0
+
+    if (checkCollision()) {
+      piece.position.y--
+      solidifyPiece()
+      removeRows()
+    }
   }
 
   draw()
