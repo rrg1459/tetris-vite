@@ -41,7 +41,7 @@ function draw() {
   board.forEach((row, y) => {
     row.forEach((value, x) => {
       if (value) {
-
+        if (value === 2) context.fillStyle = 'green'
         if (value === 9) context.fillStyle = 'gray'
         context.fillRect(x, y, 1, 1)
       }
@@ -71,7 +71,10 @@ document.addEventListener('keydown', event => {
   }
   if (event.key === 'ArrowDown') {
     piece.position.y++}
-    if (checkCollision()) piece.position.y--
+    if (checkCollision()) {
+      piece.position.y--
+      solidifyPiece()
+    }
 })
 
 function checkCollision () {
@@ -80,6 +83,18 @@ function checkCollision () {
       return value && board[y + piece.position.y]?.[x + piece.position.x] !== 0
     })
   })
+}
+
+function solidifyPiece () {
+  piece.shape.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value) {
+        board[y + piece.position.y][x + piece.position.x] = value
+      }
+    })
+  })
+  piece.position.x = 0
+  piece.position.y = 0
 }
 
 update()
