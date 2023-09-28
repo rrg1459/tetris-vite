@@ -1,3 +1,4 @@
+import { BLOCK_SIZE, PIECES, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS } from './consts'
 import './style.css'
 
 let score = 0
@@ -6,10 +7,8 @@ let score = 0
 const canvas = document.querySelector('canvas')
 const context = canvas.getContext('2d')
 const $score = document.querySelector('span')
-
-export const BLOCK_SIZE = 20
-export const BOARD_WIDTH = 14
-export const BOARD_HEIGHT = 30
+const $section = document.querySelector('section')
+const audio = new window.Audio('./tetris.mp3')
 
 canvas.width = BLOCK_SIZE * BOARD_WIDTH
 canvas.height = BLOCK_SIZE * BOARD_HEIGHT
@@ -20,38 +19,6 @@ context.scale(BLOCK_SIZE, BLOCK_SIZE)
 let dropCounter = 0
 let lastTime = 0
 
-// 9. random pieces
-export const PIECES = [
-  [
-    [2, 2],
-    [2, 2]
-  ],
-  [
-    [3, 3, 3, 3]
-  ],
-  [
-    [0, 4, 0],
-    [4, 4, 4]
-  ],
-  [
-    [5, 5, 0],
-    [0, 5, 5]
-  ],
-  [
-    [0, 6, 6],
-    [6, 6, 0]
-  ],
-  [
-    [7, 0],
-    [7, 0],
-    [7, 7]
-  ],
-  [
-    [0, 8],
-    [0, 8],
-    [8, 8]
-  ]
-]
 
 function update(time = 0) {
   const deltaTime = time - lastTime
@@ -128,15 +95,16 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-  if (event.key === 'ArrowLeft') {
+  if (event.key === EVENT_MOVEMENTS.LEFT) {
     piece.position.x--
     if (checkCollision()) piece.position.x++
   }
-  if (event.key === 'ArrowRight') {
+  if (event.key === EVENT_MOVEMENTS.RIGHT) {
     piece.position.x++
     if (checkCollision()) piece.position.x--
   }
-  if (event.key === 'ArrowDown') {
+  if (event.key === EVENT_MOVEMENTS.DOWN) {
+
     piece.position.y++
   }
   if (checkCollision()) {
@@ -145,7 +113,7 @@ document.addEventListener('keydown', event => {
     removeRows()
   }
 
-  if (event.key === 'ArrowUp') {
+  if (event.key === EVENT_MOVEMENTS.UP) {
     const rotated = []
 
     // move piece
@@ -222,3 +190,12 @@ update()
 function createBoard(width, height) {
   return Array(height).fill().map(() => Array(width).fill(0))
 }
+
+$section.addEventListener('click', () => {
+  update()
+
+  $section.remove()
+  // audio.volume = 0.01
+  audio.volume = 0.05
+  audio.play()
+})

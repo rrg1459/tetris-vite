@@ -20,5 +20,17 @@ body {
   padding: 0;
   display: grid;
   place-content: center;
-  height: 100vh; // para que lo centre verticalmente.
+  height: 100vh; 
+}
+
+section {
+  position: absolute;
+  background: black;
+  width: 100vw;
+  height: 100hw;
+  top: 0;
+  inset: 0;
+  display: grid;
+  font-size: 48px;
+  place-content: center;
 }
